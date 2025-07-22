@@ -57,7 +57,7 @@ services:
     # For NGINX, it's common to define a custom build with a Dockerfile
     # or use an entrypoint script to copy the config.
     # Let's adjust this. Simplest way is to define a custom Dockerfile for NGINX.
-    dockerfilePath: ./nginx/Dockerfile.nginx # Path to a new Dockerfile specifically for NGINX
+    # dockerfilePath: ./nginx/Dockerfile.nginx # Path to a new Dockerfile specifically for NGINX
 
     plan: starter # Match the plan for consistency, or adjust based on needs
     # healthCheckPath: / # Simple check for NGINX
