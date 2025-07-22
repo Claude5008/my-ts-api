@@ -44,8 +44,7 @@ services:
     dockerfilePath: ./nginx/Dockerfile.nginx
     # NGINX needs to listen on port 80 (HTTP)
     # Render maps its public port to this internal port
-    ports:
-      - 80
+    port: 80 # <--- CORRECTED: use 'port' not 'ports' for web service
     envVars:
       # No specific environment variables needed for NGINX usually
       - key: NGINX_ROOT
