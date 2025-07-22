@@ -1,0 +1,12 @@
+# /home/jean/my-ts-api/nginx/Dockerfile.nginx
+# Use the official NGINX base image
+FROM nginx:latest
+
+# Remove the default NGINX configuration
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copy your custom NGINX configuration into the container
+# This will be used by NGINX automatically
+COPY my_api.conf /etc/nginx/conf.d/my_api.conf
+
+# No need for EXPOSE or CMD, as the base NGINX image handles that.
