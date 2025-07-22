@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env # Your environment variables (often sensitive)
+
+# TypeScript
+*.tsbuildinfo
+dist/ # Compiled JavaScript output from TypeScript (npm run build)
+
+# VS Code
+.vscode/
+
+# Docker
+*.dockerignore
+Dockerfile # We'll copy this, but not track if using multi-stage builds where it's temporary
+docker-compose.yml # Usually kept, but if you have dev/prod specific, might ignore one
+# For this project, you want to track Dockerfile and docker-compose.yml
+# So, ensure they are NOT listed here if you want them in Git.
+
+# Logs
+*.log
+
+# npm package manager cache
+.npm/
+.yarn/

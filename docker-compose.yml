@@ -1,0 +1,37 @@
+# docker-compose.yml
+# version: '3.8' # Specify the Docker Compose file format version
+
+services:
+  # Service for your Node.js API
+  app:
+    build:
+      context: . # Build context is the current directory (where Dockerfile is)
+      dockerfile: Dockerfile # Name of the Dockerfile
+    container_name: my-ts-api-app # Optional: give your container a specific name
+    # Ports are NOT exposed here if NGINX is reverse proxying internally.
+    # We only expose it if we want to access it directly from the host for dev/debugging.
+    # ports:
+    #   - "3000:3000" # Uncomment for direct access from host (e.g., http://localhost:3000)
+    expose:
+      - "3000" # Expose port 3000 within the Docker network for other services
+    environment:
+      NODE_ENV: production # Set Node.js environment
+      # Add other environment variables needed by your Node.js app
+      # Example: DB_HOST: db (if you add a database service named 'db')
+    restart: always # Always restart the container if it stops
+
+  # Service for NGINX reverse proxy
+  nginx:
+    image: nginx:latest # Use the official NGINX Docker image
+    container_name: my-ts-api-nginx # Optional: specific name for the NGINX container
+    ports:
+      - "80:80" # Map host port 80 to container port 80 (for external access)
+      # - "443:443" # Uncomment if you add HTTPS/SSL
+    volumes:
+      # Mount your custom NGINX configuration into the container's config directory
+      - ./nginx/my_api.conf:/etc/nginx/conf.d/default.conf:ro
+      # You can also mount a custom NGINX.conf if needed, but conf.d is common
+      # - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app # Ensure the 'app' service starts before NGINX
+    restart: always # Always restart the container if it stops
